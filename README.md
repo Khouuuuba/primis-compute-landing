@@ -6,6 +6,7 @@ Static landing page for Primis Compute.
 
 - `index.html` - standalone landing page
 - `primis-logo-transparent.svg` - logo asset
+- `favicon.svg` - browser favicon
 
 ## Waitlist
 
