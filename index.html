@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Primis Compute is the pricing layer for AI compute. Normalize fragmented GPU supply into quoteable rates AI builders can reserve, apply, and track inside existing workflows.">
+<title>Primis Compute - The Pricing Layer for Compute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Geist+Mono:wght@400;500&family=Satoshi:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#040506;--bg2:#080a0d;--panel:#0d1115;--panel2:#111820;--line:#1d2730;--line2:#121920;
+  --text:#f0f5f3;--muted:#88969b;--dim:#465359;
+  --p:#73c7ae;--p2:#a8f6d7;--pd:rgba(115,199,174,.09);
+  --red:#ff7373;--red2:rgba(255,115,115,.12);--blue:#7caeff;--amber:#e9b64d;
+  --font:'Satoshi',system-ui,sans-serif;--serif:'Fraunces',Georgia,serif;--mono:'Geist Mono',monospace;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--p);color:var(--bg)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:0 28px;background:rgba(4,5,6,.72);border-bottom:1px solid rgba(255,255,255,.055);backdrop-filter:blur(22px)}
+.nav-inner{max-width:1200px;margin:0 auto;height:58px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;min-width:38px}.mark{width:28px;height:28px;display:grid;place-items:center;transition:transform .32s var(--ease),filter .32s var(--ease)}.mark img{width:100%;height:100%;display:block}.brand-name{font-size:15px;font-weight:650;letter-spacing:-.02em;max-width:152px;opacity:1;transform:translateX(0);overflow:hidden;white-space:nowrap;transition:max-width .34s var(--ease),opacity .24s var(--ease),transform .34s var(--ease)}.brand-name span{color:var(--dim);font-weight:400;margin-left:4px;font-size:11px}.nav.is-collapsed .brand-name{max-width:0;opacity:0;transform:translateX(-8px)}.nav.is-collapsed .mark{transform:scale(1.08);filter:drop-shadow(0 0 16px rgba(115,199,174,.16))}
+.nav-links{display:flex;align-items:center;gap:18px;font-size:12px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:7px;border:1px solid transparent;font-size:12.5px;font-weight:650;white-space:nowrap;transition:all .18s var(--ease);cursor:pointer}
+.btn-primary{background:var(--p);color:#03100c;padding:8px 15px}.btn-primary:hover{background:var(--p2);transform:translateY(-1px);box-shadow:0 12px 30px rgba(115,199,174,.18)}
+.btn-outline{border-color:rgba(255,255,255,.12);color:var(--text);padding:8px 15px;background:rgba(255,255,255,.02)}.btn-outline:hover{border-color:rgba(115,199,174,.42);color:var(--p)}
+.hero{min-height:100vh;position:relative;overflow:hidden;padding:120px 28px 78px;display:flex;align-items:center}
+.hero::before{content:'';position:absolute;inset:-12% -6% auto;height:78%;background:radial-gradient(circle at 50% 35%,rgba(115,199,174,.17),transparent 32%),radial-gradient(circle at 72% 22%,rgba(124,174,255,.09),transparent 25%);pointer-events:none}
+.hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse 54% 50% at 50% 40%,black,transparent);opacity:.55;pointer-events:none}
+.hero-wrap{position:relative;z-index:2;max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:minmax(0,.95fr) minmax(420px,1.05fr);gap:54px;align-items:center}
+.eyebrow{font-family:var(--mono);font-size:11px;color:var(--p);letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px}
+h1{font-family:var(--serif);font-size:clamp(54px,7vw,96px);line-height:.95;font-weight:400;letter-spacing:-.055em;max-width:720px}
+h1 em,.section-title em{font-style:italic;color:var(--p);font-weight:300}
+.hero-sub{max-width:560px;margin-top:26px;color:var(--muted);font-size:clamp(15px,1.45vw,18px);line-height:1.7;font-weight:300}
+.hero-actions{display:flex;gap:10px;margin-top:34px;flex-wrap:wrap}.hero-actions .btn{min-height:43px;padding-left:20px;padding-right:20px}
+.hero-proof{position:relative;min-height:560px;display:grid;place-items:center}
+.orbit{position:absolute;inset:32px;border:1px solid rgba(115,199,174,.12);border-radius:50%;filter:drop-shadow(0 0 40px rgba(115,199,174,.08))}
+.provider-card{position:absolute;width:210px;border:1px solid rgba(255,115,115,.18);border-radius:14px;background:rgba(9,12,15,.76);box-shadow:0 24px 70px rgba(0,0,0,.34);backdrop-filter:blur(14px);padding:13px;color:var(--muted)}
+.provider-card.a{left:0;top:72px;transform:rotate(-7deg)}.provider-card.b{right:10px;top:42px;transform:rotate(5deg)}.provider-card.c{left:28px;bottom:88px;transform:rotate(4deg)}
+.pc-url{height:20px;border:1px solid rgba(255,255,255,.08);border-radius:999px;background:rgba(255,255,255,.035);font:9px var(--mono);color:var(--dim);display:flex;align-items:center;padding:0 8px;margin-bottom:10px;white-space:nowrap;overflow:hidden}
+.pc-row{display:flex;justify-content:space-between;font-size:11px}.pc-price{font-size:32px;line-height:1;margin-top:8px;color:#fff0ed;font-weight:850;letter-spacing:-.06em}.pc-note{font:10px var(--mono);color:var(--red);margin-top:5px}
+.quote-core{position:relative;z-index:3;width:min(430px,100%);border:1px solid rgba(115,199,174,.22);border-radius:20px;background:linear-gradient(180deg,rgba(115,199,174,.1),rgba(8,11,14,.94));box-shadow:0 34px 120px rgba(0,0,0,.52),0 0 90px rgba(115,199,174,.12);overflow:hidden}
+.quote-top{height:48px;border-bottom:1px solid rgba(255,255,255,.075);display:flex;align-items:center;padding:0 16px;font:11px var(--mono);color:var(--p)}.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--p);box-shadow:0 0 0 5px rgba(115,199,174,.1);margin-right:8px}
+.quote-body{padding:22px}.rate{font-size:72px;line-height:.9;color:var(--p);font-weight:880;letter-spacing:-.08em}.unit{font:12px var(--mono);color:var(--muted);margin-top:9px}.qid{font:12px var(--mono);color:var(--blue);margin-top:15px}
+.quote-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px}.qm{border:1px solid rgba(255,255,255,.075);border-radius:10px;background:rgba(255,255,255,.03);padding:10px}.qm .k{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}.qm .v{font-size:17px;color:var(--text);font-weight:750;margin-top:3px}
+.quote-apply{border-top:1px solid rgba(255,255,255,.075);padding:14px 16px;font:11px var(--mono);color:var(--p);background:rgba(115,199,174,.045)}
+.section{position:relative;padding:104px 28px}.section::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+.wrap{max-width:1200px;margin:0 auto}.section-head{max-width:760px;margin-bottom:34px}.section-label{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--p);margin-bottom:13px}.section-title{font-family:var(--serif);font-size:clamp(34px,4vw,54px);line-height:1.03;font-weight:400;letter-spacing:-.04em}.section-copy{margin-top:18px;color:var(--muted);font-size:15px;line-height:1.75;font-weight:300;max-width:650px}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.compare-card{border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));padding:24px;min-height:270px}.compare-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}.old-card{border-color:rgba(255,115,115,.18)}.old-card .compare-label{color:var(--red)}.primis-card{border-color:rgba(115,199,174,.24);box-shadow:0 0 60px rgba(115,199,174,.04)}.primis-card .compare-label{color:var(--p)}
+.compare-card ul{list-style:none;display:grid;gap:12px}.compare-card li{position:relative;padding-left:18px;color:var(--muted);font-size:14px}.compare-card li::before{content:'';position:absolute;left:0;top:.68em;width:6px;height:6px;border-radius:50%;background:var(--dim)}.old-card li::before{background:var(--red)}.primis-card li::before{background:var(--p)}
+.proof{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:center}.proof-list{display:grid;gap:10px;margin-top:24px}.proof-list div{border:1px solid var(--line2);border-radius:12px;background:rgba(255,255,255,.018);padding:14px}.proof-list strong{display:block;font-size:13px;color:var(--text);margin-bottom:3px}.proof-list span{font-size:12.5px;color:var(--muted);line-height:1.5}
+.code-card{border:1px solid rgba(115,199,174,.2);border-radius:18px;background:linear-gradient(180deg,rgba(115,199,174,.06),rgba(11,15,18,.96));overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.38)}.code-head{height:46px;border-bottom:1px solid rgba(255,255,255,.075);display:flex;justify-content:space-between;align-items:center;padding:0 15px;font:11px var(--mono);color:var(--p)}.code-head code{color:var(--dim);font-family:var(--mono);font-size:10px}.quote-code{margin:0;padding:24px;background:#07090c;color:#c5d0cf;font-family:var(--mono);font-size:12.5px;line-height:1.75;overflow:auto}.quote-code .prompt{color:var(--p2)}.quote-code .muted{color:var(--dim)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line2);border:1px solid var(--line);border-radius:16px;overflow:hidden}.card{background:var(--panel);padding:30px 22px}.card-num{font-family:var(--mono);font-size:10px;color:var(--p);letter-spacing:.08em;margin-bottom:12px}.card h3{font-size:16px;margin-bottom:8px}.card p{font-size:13px;color:var(--muted);line-height:1.7;font-weight:300}
+.mechanics{text-align:center}.mechanics .section-head{margin-left:auto;margin-right:auto}.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:30px}.chip{display:flex;align-items:center;gap:7px;border:1px solid rgba(115,199,174,.15);border-radius:999px;background:rgba(115,199,174,.055);padding:8px 15px;font-size:12px;color:var(--p)}.chip i{width:5px;height:5px;border-radius:50%;background:var(--p)}
+.waitlist{padding:104px 28px 118px;text-align:center;position:relative}.waitlist::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+.waitlist-box{max-width:760px;margin:0 auto;border:1px solid rgba(115,199,174,.26);border-radius:20px;background:radial-gradient(circle at 50% 0%,rgba(115,199,174,.13),transparent 34%),linear-gradient(180deg,rgba(115,199,174,.08),rgba(255,255,255,.012));box-shadow:0 0 110px rgba(115,199,174,.09);padding:42px 30px}.waitlist h2{font-family:var(--serif);font-size:clamp(34px,4.2vw,54px);font-weight:400;line-height:1.04;letter-spacing:-.04em}.waitlist p{color:var(--muted);font-size:15px;margin:16px auto 24px;max-width:560px;line-height:1.7}
+.beta-tags{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:-8px auto 24px}.beta-tags span{border:1px solid rgba(115,199,174,.16);background:var(--pd);color:var(--p);border-radius:999px;padding:6px 10px;font-size:11px}
+.waitlist-form{display:flex;gap:8px;max-width:510px;margin:0 auto}.waitlist-form input{flex:1;min-width:0;border:1px solid var(--line);border-radius:8px;background:#07090c;color:var(--text);padding:12px;font-family:var(--font);font-size:13px;outline:none}.waitlist-form input:focus{border-color:rgba(115,199,174,.55);box-shadow:0 0 0 3px rgba(115,199,174,.08)}.waitlist-form .btn:disabled{opacity:.65;cursor:wait;transform:none;box-shadow:none}.form-status{min-height:18px;margin:14px auto 0!important;font:12px var(--mono);color:var(--p)!important}.form-status.error{color:var(--red)!important}
+.footer{border-top:1px solid var(--line2);padding:24px;text-align:center;color:var(--dim);font-size:11px}
+.fade{opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease)}.fade.visible{opacity:1;transform:translateY(0)}
+@media(max-width:980px){.hero{padding-top:104px}.hero-wrap,.proof,.compare-grid,.cards{grid-template-columns:1fr}.hero-proof{min-height:500px}.provider-card{display:none}.section{padding:78px 24px}.cards{grid-template-columns:1fr}.waitlist-form{flex-direction:column}.waitlist-form .btn{min-height:43px}}
+@media(max-width:620px){.nav{padding:0 18px}.nav-inner{height:56px}.brand-name{display:none}.nav-links .btn{padding:8px 12px}h1{font-size:clamp(46px,15vw,68px)}.hero{min-height:auto;padding:104px 20px 68px}.hero-wrap{gap:24px}.hero-proof{min-height:auto;display:block}.orbit{display:none}.quote-core{margin-top:30px}.quote-metrics{grid-template-columns:1fr}.rate{font-size:58px}.quote-code{font-size:11px;white-space:pre-wrap}.section,.waitlist{padding-left:20px;padding-right:20px}.waitlist-box{padding:34px 18px}.beta-tags{margin-top:0}.waitlist-form input,.waitlist-form .btn{width:100%}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="Primis Compute home">
+      <span class="mark"><img src="primis-logo-transparent.svg" alt="Primis logo"></span>
+      <span class="brand-name">Primis<span>Compute</span></span>
+    </a>
+    <div class="nav-links">
+      <a class="btn btn-primary" href="#waitlist">Join Beta Waitlist</a>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-wrap">
+      <div>
+        <div class="eyebrow">The Pricing Layer for AI Compute</div>
+        <h1>The pricing layer<br>for <em>compute.</em></h1>
+        <p class="hero-sub">Compute pricing is fragmented, volatile, and opaque. Primis normalizes it into quoteable rates AI builders can reserve, apply, and track inside their existing workflows.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#waitlist">Join Beta Waitlist</a>
+          <a class="btn btn-outline" href="#proof">View Quote Object</a>
+        </div>
+      </div>
+      <div class="hero-proof" aria-label="Primis quote object visual">
+        <div class="orbit"></div>
+        <div class="provider-card a"><div class="pc-url">provider-a.ai/pricing</div><div class="pc-row"><span>A100 80GB</span><span>us-east</span></div><div class="pc-price">$1.18</div><div class="pc-note">changed 4m ago</div></div>
+        <div class="provider-card b"><div class="pc-url">provider-b.net/gpu</div><div class="pc-row"><span>A100 80GB</span><span>eu-west</span></div><div class="pc-price">$0.96</div><div class="pc-note">limited availability</div></div>
+        <div class="provider-card c"><div class="pc-url">provider-c.dev/quotes</div><div class="pc-row"><span>A100 80GB</span><span>auto</span></div><div class="pc-price">$1.32</div><div class="pc-note">rate spike</div></div>
+        <div class="quote-core">
+          <div class="quote-top"><div><span class="status-dot"></span>Providers abstracted</div></div>
+          <div class="quote-body">
+            <div class="rate">$0.74</div>
+            <div class="unit">per GPU-hour · reserved quote</div>
+            <div class="qid">qt_a100_30d_7x2k</div>
+            <div class="quote-metrics">
+              <div class="qm"><div class="k">Routes</div><div class="v">68</div></div>
+              <div class="qm"><div class="k">Confidence</div><div class="v">99.8%</div></div>
+              <div class="qm"><div class="k">Expires</div><div class="v">10m</div></div>
+            </div>
+          </div>
+          <div class="quote-apply">quote_id -> workload_id -> usage priced</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="problem">
+    <div class="wrap">
+      <div class="section-head fade">
+        <div class="section-label">Old Way vs Primis</div>
+        <h2 class="section-title">Stop comparing providers.<br>Start <em>querying prices.</em></h2>
+        <p class="section-copy">Compute pricing should not live across dashboards, stale quote screenshots, and spreadsheets. It should be an object your workflow can use.</p>
+      </div>
+      <div class="compare-grid fade">
+        <div class="compare-card old-card">
+          <div class="compare-label">The old way</div>
+          <ul>
+            <li>Compare fragmented provider dashboards</li>
+            <li>Chase volatile GPU rates</li>
+            <li>Refresh stale quotes</li>
+            <li>Maintain pricing spreadsheets</li>
+            <li>Guess what workloads will cost</li>
+          </ul>
+        </div>
+        <div class="compare-card primis-card">
+          <div class="compare-label">The Primis way</div>
+          <ul>
+            <li>Query one compute pricing layer</li>
+            <li>Create quoteable rate objects</li>
+            <li>Reserve the workload window</li>
+            <li>Attach pricing to workload IDs</li>
+            <li>Track usage and forecast spend</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="proof">
+    <div class="wrap proof">
+      <div class="fade">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-title">A compute quote should be <em>programmable.</em></h2>
+        <p class="section-copy">Primis quote objects package the normalized rate, expiry window, confidence, indexed route count, and workload attachment state into something your workflow can use directly.</p>
+        <div class="proof-list">
+          <div><strong>Quoteable rate</strong><span>$0.74/GPU-hour for the selected workload window.</span></div>
+          <div><strong>Confidence included</strong><span>Route freshness and reliability travel with the quote.</span></div>
+          <div><strong>Usage-ready</strong><span>Attach the quote to a workload ID and track spend against it.</span></div>
+        </div>
+      </div>
+      <div class="code-card fade">
+        <div class="code-head"><div><span class="status-dot"></span>Ready to apply</div><code>quote object</code></div>
+        <pre class="quote-code" aria-label="Primis quote object"><span class="prompt">$ primis quote create --gpu a100 --window 30d</span>
+<span class="muted">normalizing indexed compute routes...</span>
+{
+  "quote_id": "qt_a100_30d_7x2k",
+  "gpu": "A100 80GB",
+  "rate": "$0.74/GPU-hour",
+  "expires_in": "10m",
+  "confidence": "99.8%",
+  "routes_indexed": 68,
+  "workload_id": "rag-pipeline:v2"
+}
+<span class="prompt">quote ready -> attach to workload</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="section-head fade">
+        <div class="section-label">Workflow</div>
+        <h2 class="section-title">Quote. Reserve. Apply. Track.</h2>
+        <p class="section-copy">A pricing layer for compute should fit inside the stack AI builders already use.</p>
+      </div>
+      <div class="cards fade">
+        <div class="card"><div class="card-num">01 - INDEX</div><h3>Normalize prices</h3><p>Aggregate broad GPU supply and normalize pricing into comparable, confidence-scored rates.</p></div>
+        <div class="card"><div class="card-num">02 - QUOTE</div><h3>Create a rate object</h3><p>Generate a quote with rate, expiry, indexed route count, and workload-ready metadata.</p></div>
+        <div class="card"><div class="card-num">03 - APPLY</div><h3>Attach to workload</h3><p>Apply the reserved rate to a workload ID inside the user's existing infrastructure.</p></div>
+        <div class="card"><div class="card-num">04 - TRACK</div><h3>Price usage</h3><p>Match usage events to the quote and update billing forecasts before spend surprises the team.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section mechanics" id="mechanics">
+    <div class="wrap fade">
+      <div class="section-head">
+        <div class="section-label">Pricing Mechanics</div>
+        <h2 class="section-title">Provider chaos, abstracted.</h2>
+        <p class="section-copy">Primis is not a compute provider. It is the pricing layer that turns fragmented compute supply into normalized, confidence-scored rates.</p>
+      </div>
+      <div class="chips">
+        <span class="chip"><i></i> Provider prices normalized</span>
+        <span class="chip"><i></i> Stale routes excluded</span>
+        <span class="chip"><i></i> Confidence scored</span>
+        <span class="chip"><i></i> Quote expiry enforced</span>
+        <span class="chip"><i></i> Usage matched to quote</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="waitlist" id="waitlist">
+    <div class="waitlist-box fade">
+      <div class="section-label">Open Beta</div>
+      <h2>Join the Primis Compute beta.</h2>
+      <p>For AI builders who need predictable compute pricing inside the workflows they already use.</p>
+      <div class="beta-tags">
+        <span>Inference teams</span>
+        <span>AI agents</span>
+        <span>Training workloads</span>
+        <span>Compute-heavy apps</span>
+      </div>
+      <form class="waitlist-form" action="https://formspree.io/f/xlgzorbb" method="POST">
+        <input type="email" name="email" placeholder="you@company.com" aria-label="Email address" required>
+        <button class="btn btn-primary" type="submit">Join Beta Waitlist</button>
+      </form>
+      <p class="form-status" aria-live="polite"></p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">© 2026 Primis Protocol. All rights reserved.</footer>
+
+<script>
+const nav=document.querySelector('.nav');
+const setNavState=()=>nav.classList.toggle('is-collapsed',window.scrollY>90);
+setNavState();
+window.addEventListener('scroll',setNavState,{passive:true});
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach((entry)=>{if(entry.isIntersecting)entry.target.classList.add('visible')});
+},{threshold:.15});
+document.querySelectorAll('.fade').forEach((el)=>observer.observe(el));
+const waitlistForm=document.querySelector('.waitlist-form');
+const formStatus=document.querySelector('.form-status');
+if(waitlistForm&&formStatus){
+  const button=waitlistForm.querySelector('button');
+  const email=waitlistForm.querySelector('input[name="email"]');
+  waitlistForm.addEventListener('submit',async(event)=>{
+    event.preventDefault();
+    formStatus.classList.remove('error');
+    formStatus.textContent='Submitting...';
+    button.disabled=true;
+    button.textContent='Submitting';
+    try{
+      const response=await fetch(waitlistForm.action,{
+        method:'POST',
+        body:new FormData(waitlistForm),
+        headers:{Accept:'application/json'}
+      });
+      if(!response.ok)throw new Error('Submission failed');
+      waitlistForm.reset();
+      formStatus.textContent='You are on the beta waitlist. We will be in touch soon.';
+      button.textContent='Joined';
+      email.disabled=true;
+    }catch(error){
+      formStatus.classList.add('error');
+      formStatus.textContent='Something went wrong. Please try again.';
+      button.disabled=false;
+      button.textContent='Join Beta Waitlist';
+    }
+  });
+}
+</script>
+</body>
+</html>
