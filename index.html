@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Primis Compute is the pricing layer for AI compute. Normalize fragmented GPU supply into quoteable rates AI builders can reserve, apply, and track inside existing workflows.">
+<meta name="description" content="Primis Compute is the pricing layer for AI compute. Normalize fragmented GPU supply into clear rates AI builders can reserve, apply, and track inside existing workflows.">
 <title>Primis Compute - The Pricing Layer for Compute</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,13 +86,13 @@ h1 em,.section-title em{font-style:italic;color:var(--p);font-weight:300}
       <div>
         <div class="eyebrow">The Pricing Layer for AI Compute</div>
         <h1>The pricing layer<br>for <em>compute.</em></h1>
-        <p class="hero-sub">Compute pricing is fragmented, volatile, and opaque. Primis normalizes it into quoteable rates AI builders can reserve, apply, and track inside their existing workflows.</p>
+        <p class="hero-sub">Compute pricing is fragmented, volatile, and opaque. Primis normalizes it into clear rates AI builders can reserve, apply, and track inside their existing workflows.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#waitlist">Join Beta Waitlist</a>
           <a class="btn btn-outline" href="#proof">How It Works</a>
         </div>
       </div>
-      <div class="hero-proof" aria-label="Primis quote object visual">
+      <div class="hero-proof" aria-label="Primis compute quote visual">
         <div class="orbit"></div>
         <div class="provider-card a"><div class="pc-url">provider-a.ai/pricing</div><div class="pc-row"><span>A100 80GB</span><span>us-east</span></div><div class="pc-price">$1.18</div><div class="pc-note">changed 4m ago</div></div>
         <div class="provider-card b"><div class="pc-url">provider-b.net/gpu</div><div class="pc-row"><span>A100 80GB</span><span>eu-west</span></div><div class="pc-price">$0.96</div><div class="pc-note">limited availability</div></div>
@@ -120,7 +120,7 @@ h1 em,.section-title em{font-style:italic;color:var(--p);font-weight:300}
       <div class="section-head fade">
         <div class="section-label">Old Way vs Primis</div>
         <h2 class="section-title">Stop comparing providers.<br>Start <em>querying prices.</em></h2>
-        <p class="section-copy">Compute pricing should not live across dashboards, stale quote screenshots, and spreadsheets. It should be an object your workflow can use.</p>
+        <p class="section-copy">Compute pricing should not live across dashboards, stale quote screenshots, and spreadsheets. It should be a rate your team can use before the workload runs.</p>
       </div>
       <div class="compare-grid fade">
         <div class="compare-card old-card">
@@ -137,7 +137,7 @@ h1 em,.section-title em{font-style:italic;color:var(--p);font-weight:300}
           <div class="compare-label">The Primis way</div>
           <ul>
             <li>Query one compute pricing layer</li>
-            <li>Create quoteable rate objects</li>
+            <li>Create clear compute quotes</li>
             <li>Reserve the workload window</li>
             <li>Attach pricing to workload IDs</li>
             <li>Track usage and forecast spend</li>
@@ -151,17 +151,17 @@ h1 em,.section-title em{font-style:italic;color:var(--p);font-weight:300}
     <div class="wrap proof">
       <div class="fade">
         <div class="section-label">How It Works</div>
-        <h2 class="section-title">A compute quote should be <em>programmable.</em></h2>
-        <p class="section-copy">Primis quote objects package the normalized rate, expiry window, confidence, indexed route count, and workload attachment state into something your workflow can use directly.</p>
+        <h2 class="section-title">A compute price should be <em>usable.</em></h2>
+        <p class="section-copy">Primis turns fragmented compute pricing into a clear rate your team can use before running a workload. Each quote shows the price, how long it is valid, and how it connects to usage.</p>
         <div class="proof-list">
-          <div><strong>Quoteable rate</strong><span>$0.74/GPU-hour for the selected workload window.</span></div>
-          <div><strong>Confidence included</strong><span>Route freshness and reliability travel with the quote.</span></div>
-          <div><strong>Usage-ready</strong><span>Attach the quote to a workload ID and track spend against it.</span></div>
+          <div><strong>Clear rate</strong><span>Know the GPU-hour price before the workload runs.</span></div>
+          <div><strong>Validity window</strong><span>See how long that price is available.</span></div>
+          <div><strong>Usage-ready</strong><span>Connect the price to a workload and track spend against it.</span></div>
         </div>
       </div>
       <div class="code-card fade">
-        <div class="code-head"><div><span class="status-dot"></span>Ready to apply</div><code>quote object</code></div>
-        <pre class="quote-code" aria-label="Primis quote object"><span class="prompt">$ primis quote create --gpu a100 --window 30d</span>
+        <div class="code-head"><div><span class="status-dot"></span>Ready to use</div><code>compute quote</code></div>
+        <pre class="quote-code" aria-label="Primis compute quote"><span class="prompt">$ primis quote create --gpu a100 --window 30d</span>
 <span class="muted">normalizing indexed compute routes...</span>
 {
   "quote_id": "qt_a100_30d_7x2k",
@@ -181,14 +181,14 @@ h1 em,.section-title em{font-style:italic;color:var(--p);font-weight:300}
     <div class="wrap">
       <div class="section-head fade">
         <div class="section-label">Workflow</div>
-        <h2 class="section-title">Quote. Reserve. Apply. Track.</h2>
-        <p class="section-copy">A pricing layer for compute should fit inside the stack AI builders already use.</p>
+        <h2 class="section-title">Check the price. Reserve it. Track usage.</h2>
+        <p class="section-copy">Primis gives AI builders a simple pricing workflow that fits into the infrastructure they already use.</p>
       </div>
       <div class="cards fade">
-        <div class="card"><div class="card-num">01 - INDEX</div><h3>Normalize prices</h3><p>Aggregate broad GPU supply and normalize pricing into comparable, confidence-scored rates.</p></div>
-        <div class="card"><div class="card-num">02 - QUOTE</div><h3>Create a rate object</h3><p>Generate a quote with rate, expiry, indexed route count, and workload-ready metadata.</p></div>
-        <div class="card"><div class="card-num">03 - APPLY</div><h3>Attach to workload</h3><p>Apply the reserved rate to a workload ID inside the user's existing infrastructure.</p></div>
-        <div class="card"><div class="card-num">04 - TRACK</div><h3>Price usage</h3><p>Match usage events to the quote and update billing forecasts before spend surprises the team.</p></div>
+        <div class="card"><div class="card-num">01 - CHECK</div><h3>Get a clear rate</h3><p>Primis compares fragmented compute pricing and returns one normalized price for the workload.</p></div>
+        <div class="card"><div class="card-num">02 - RESERVE</div><h3>Lock the window</h3><p>See how long the rate is valid so your team can make a decision before prices move.</p></div>
+        <div class="card"><div class="card-num">03 - APPLY</div><h3>Use it in your stack</h3><p>Connect the price to a workload ID inside your existing infrastructure.</p></div>
+        <div class="card"><div class="card-num">04 - TRACK</div><h3>Follow spend</h3><p>Match usage back to the quoted price and forecast cost before the bill surprises the team.</p></div>
       </div>
     </div>
   </section>
