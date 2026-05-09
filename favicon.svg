@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="500" height="500" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <mask id="primis-ring-transparent">
-      <circle cx="50" cy="50" r="45" fill="white"/>
-      <ellipse cx="50" cy="48" rx="24" ry="20" fill="black"/>
-    </mask>
-  </defs>
-  <g transform="rotate(15, 50, 50)">
-    <circle cx="50" cy="50" r="45" fill="#F2E8DE" mask="url(#primis-ring-transparent)"/>
-  </g>
+  <path
+    fill="#F2E8DE"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    transform="rotate(15 50 50)"
+    d="M50 5a45 45 0 1 1 0 90 45 45 0 0 1 0-90Zm0 23a24 20 0 1 1 0 40 24 20 0 0 1 0-40Z"
+  />
 </svg>
